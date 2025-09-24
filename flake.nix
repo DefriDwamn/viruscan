@@ -13,6 +13,8 @@
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [
           cmake
+          cmake-language-server
+          cmake-format
           gdb
           clang
           clang-tools
