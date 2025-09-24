@@ -1,0 +1,6 @@
+build
+.cache/
+.helix/
+.clangd
+lib/build
+cli/build
