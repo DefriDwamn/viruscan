@@ -18,6 +18,7 @@ protected:
     fs::create_directories(test_dir);
   }
 
+  // TODO: uncomment and add automatic LargeFile test with md5sum utility!
   // void TearDown() override { fs::remove_all(test_dir); }
 
   fs::path create_test_file(const std::string &filename,
