@@ -23,12 +23,13 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 include_directories("include")
 add_library(viruscanlib SHARED ${SOURCES})
 target_link_libraries(viruscanlib PRIVATE Boost::filesystem Boost::hash2)
+target_include_directories(viruscanlib PRIVATE ../externals/concurrentqueue)
 
 option(BUILD_TESTS "Tests" ON)
 if(BUILD_TESTS)
   enable_testing()
-
-  add_executable(viruscanlib_tests tests/test_md5calc.cpp)
+  file(GLOB_RECURSE TESTS_SOURCES "tests/*.cpp")
+  add_executable(viruscanlib_tests ${TESTS_SOURCES})
   target_link_libraries(viruscanlib_tests PRIVATE viruscanlib GTest::gtest_main
                                                   Boost::filesystem)
   include(GoogleTest)
