@@ -1,6 +1,5 @@
 #include "virusdatabase.hpp"
 #include <boost/filesystem.hpp>
-#include <boost/iostreams/device/mapped_file.hpp>
 #include <format>
 #include <fstream>
 #include <iostream>
@@ -76,7 +75,6 @@ void VirusDatabase::init_csv() {
   while (std::getline(file, line) && records_loaded < MAX_CACHE_SIZE) {
     if (line.length() < 33)
       continue;
-    std::cout << "line: "<<line << '\n';
     if (line[32] == ';') {
       std::string md5 = line.substr(0, 32);
       std::string threat_type = line.substr(33);

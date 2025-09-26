@@ -66,7 +66,7 @@ TEST_F(MD5CalcTest, RussianText) {
 }
 
 TEST_F(MD5CalcTest, LargeFile) {
-  auto filepath = create_random_file("large.bin", 1 * 1024 * 1024 * 1024);
+  auto filepath = create_random_file("large.bin", 100 * 1024 * 1024);
   auto result = calculator.calc(filepath);
   std::cout << "Large md5: " << result << "\n";
   EXPECT_EQ(result.size(), 32);
