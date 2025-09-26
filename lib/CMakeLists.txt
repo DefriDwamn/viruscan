@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES
     ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+# For Windows: https://google.github.io/googletest/quickstart-cmake.html
+set(gtest_force_shared_crt
+    ON
+    CACHE BOOL "" FORCE)
+set(CONCURRENTQUEUE_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/../externals/concurrentqueue)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -23,15 +29,17 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 include_directories("include")
 add_library(viruscanlib SHARED ${SOURCES})
 target_link_libraries(viruscanlib PRIVATE Boost::filesystem Boost::hash2)
-target_include_directories(viruscanlib PRIVATE ../externals/concurrentqueue)
+target_include_directories(viruscanlib PRIVATE ${CONCURRENTQUEUE_DIR})
 
 option(BUILD_TESTS "Tests" ON)
 if(BUILD_TESTS)
   enable_testing()
   file(GLOB_RECURSE TESTS_SOURCES "tests/*.cpp")
   add_executable(viruscanlib_tests ${TESTS_SOURCES})
-  target_link_libraries(viruscanlib_tests PRIVATE viruscanlib GTest::gtest_main
-                                                  Boost::filesystem)
+  target_link_libraries(
+    viruscanlib_tests PRIVATE viruscanlib GTest::gtest_main GTest::gmock
+                              Boost::filesystem)
+  target_include_directories(viruscanlib_tests PRIVATE ${CONCURRENTQUEUE_DIR})
   include(GoogleTest)
   gtest_discover_tests(viruscanlib_tests
                        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
