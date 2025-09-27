@@ -1,8 +1,10 @@
 #include "virusdatabase.hpp"
 #include <boost/filesystem.hpp>
+#include <cctype>
 #include <format>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include <optional>
 #include <string_view>
 
@@ -22,7 +24,8 @@ VirusDatabase::search_in_file(std::string_view md5_hash) const {
   while (std::getline(file, line)) {
     if (line.length() < 33)
       continue;
-
+    std::transform(line.begin(), line.end(), line.begin(),
+              [](unsigned char c){ return std::tolower(c);});
     if (line.compare(0, 32, md5_hash) == 0 && line[32] == ';') {
       std::string threat_type = line.substr(33);
 
@@ -78,7 +81,10 @@ void VirusDatabase::init_csv() {
     if (line.length() < 33)
       continue;
     if (line[32] == ';') {
+
       std::string md5 = line.substr(0, 32);
+      std::transform(md5.begin(), md5.end(), md5.begin(),
+              [](unsigned char c){ return std::tolower(c);});
       std::string threat_type = line.substr(33);
 
       size_t start = threat_type.find_first_not_of(" \t");
