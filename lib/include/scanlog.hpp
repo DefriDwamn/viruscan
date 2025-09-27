@@ -96,6 +96,17 @@ public:
     }
   }
 
+  static std::string sanitize(const std::string &s) {
+    std::string out;
+    out.reserve(s.size());
+    for (char c : s) {
+      if (c != '\n' && c != '\r') {
+        out.push_back(c);
+      }
+    }
+    return out;
+  }
+
   void write_log(const std::string &message) { log_queue.enqueue(message); }
 
   void on_file_scanned(const FileScannedEvent &event) override {
@@ -105,7 +116,7 @@ public:
 
   void on_virus_found(const VirusFoundEvent &event) override {
     write_log(std::format("VIRUS|{}|{}|{}", event.path.generic_string(),
-                          event.threat_name, event.md5_hash));
+                          sanitize(event.threat_name), event.md5_hash));
   }
 
   void on_scan_error(const ScanErrorEvent &event) override {
