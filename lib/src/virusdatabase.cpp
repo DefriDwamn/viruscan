@@ -47,6 +47,8 @@ VirusDatabase::contains(std::string_view md5_hash) const {
   std::string key(md5_hash);
   if (auto it = cache.find(key); it != cache.end()) {
     return it->second;
+  } else if (cache.size() < MAX_CACHE_SIZE) {
+    return std::nullopt;
   }
   return search_in_file(md5_hash);
 }
@@ -91,8 +93,5 @@ void VirusDatabase::init_csv() {
       }
     }
   }
-
-  std::cout << std::format("VirusDB loaded: {} records in cache\n",
-                           cache.size());
 }
 } // namespace viruscan

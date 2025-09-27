@@ -1,3 +1,4 @@
+#pragma once
 #include "blockingconcurrentqueue.h"
 #include "boost/filesystem/path.hpp"
 #include <chrono>
