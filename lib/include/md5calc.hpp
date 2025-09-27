@@ -1,8 +1,9 @@
+#include "viruscanlib_export.hpp"
 #include <boost/filesystem.hpp>
 #include <string>
 
 namespace viruscan {
-class md5calc {
+class VIRUSCANLIB_API md5calc {
 public:
   std::string calc(const boost::filesystem::path &filepath);
 

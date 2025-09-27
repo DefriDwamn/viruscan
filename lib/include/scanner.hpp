@@ -2,14 +2,13 @@
 
 #include "blockingconcurrentqueue.h"
 #include "boost/filesystem/path.hpp"
+#include "viruscanlib_export.hpp"
 #include <chrono>
 #include <md5calc.hpp>
 #include <memory>
 #include <scanlog.hpp>
-#include <string_view>
 #include <thread>
 #include <virusdatabase.hpp>
-#include "viruscanlib_export.hpp"
 
 namespace viruscan {
 class VIRUSCANLIB_API Scanner {

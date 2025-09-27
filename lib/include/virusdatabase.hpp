@@ -1,10 +1,11 @@
 #include "boost/filesystem/path.hpp"
-#include "optional"
+#include <optional>
 #include <string>
+#include "viruscanlib_export.hpp"
 #include <unordered_map>
 
 namespace viruscan {
-class VirusDatabase {
+class VIRUSCANLIB_API VirusDatabase {
 private:
   boost::filesystem::path csv_path;
   static constexpr size_t MAX_CACHE_SIZE = 100'000;
