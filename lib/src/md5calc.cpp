@@ -9,7 +9,7 @@
 namespace viruscan {
 
 std::string md5calc::calc(const boost::filesystem::path &filepath) {
-  std::ifstream f(filepath, std::ios::binary);
+  std::ifstream f(filepath.string(), std::ios::binary);
   if (!f) {
     throw std::runtime_error(filepath.string());
   }

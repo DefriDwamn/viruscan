@@ -14,7 +14,7 @@ VirusDatabase::VirusDatabase(const boost::filesystem::path &csv_path)
 
 std::optional<std::string>
 VirusDatabase::search_in_file(std::string_view md5_hash) const {
-  std::ifstream file(csv_path, std::ios::binary);
+  std::ifstream file(csv_path.string(), std::ios::binary);
   if (!file) {
     return std::nullopt;
   }
@@ -66,7 +66,7 @@ void VirusDatabase::init_csv() {
         std::format("VirusDB not a file: {}", csv_path.string()));
   }
 
-  std::ifstream file(csv_path, std::ios::binary);
+  std::ifstream file(csv_path.string(), std::ios::binary);
   if (!file) {
     throw std::runtime_error("Cannot open virus database file");
   }
