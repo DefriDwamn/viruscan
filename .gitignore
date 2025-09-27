@@ -4,3 +4,4 @@ build
 .clangd
 lib/build
 cli/build
+hashes.csv
