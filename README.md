@@ -1,6 +1,7 @@
 # Сборка
 ## Windows
-- Compiler = msvc
+- Compiler = MSVC 19.44.35217.0
+- CMake generator = Visual Studio 17 2022
 - Зависимости загружаются через fetchcontet + camelqueue(header-only) как git submodule
 - Конфигурация и сборка:
 ```bash
@@ -11,6 +12,12 @@ cmake ..
 ```
 ```bash
 cmake --build . --target viruscancli
+```
+- Тесты:
+```bash
+cmake --build . --target viruscanlib_tests
+cd lib
+ctest
 ```
 
 # Генерация таблицы вирусов по имеющимся файлам
