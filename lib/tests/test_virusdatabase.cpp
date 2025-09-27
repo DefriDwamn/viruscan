@@ -19,7 +19,7 @@ protected:
   void TearDown() override { fs::remove_all(test_dir); }
   fs::path create_sample_db() {
     auto path = test_dir / "viruses.csv";
-    std::ofstream file(path);
+    std::ofstream file(path.string(), std::ios::binary);
     file << "a9963513d093ffb2bc7ceb9807771ad4;Exploit\n"
          << "ac6204ffeb36d2320e52f1d551cfa370;Dropper\n"
          << "8ee70903f43b227eeb971262268af5a8;Downloader\n"
@@ -31,7 +31,7 @@ protected:
   }
   fs::path create_large_db() {
     auto path = test_dir / "large.csv";
-    std::ofstream file(path);
+    std::ofstream file(path.string(), std::ios::binary);
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 15);

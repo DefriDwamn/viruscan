@@ -4,6 +4,7 @@
 #include <boost/filesystem.hpp>
 #include <fstream>
 #include <gtest/gtest.h>
+#include <limits>
 #include <random>
 
 namespace fs = boost::filesystem;
@@ -19,25 +20,26 @@ protected:
   }
 
   // TODO: uncomment and add automatic LargeFile test with md5sum utility!
-  // void TearDown() override { fs::remove_all(test_dir); }
+  void TearDown() override { fs::remove_all(test_dir); }
 
   fs::path create_test_file(const std::string &filename,
                             const std::string &content) {
     auto path = test_dir / filename;
-    std::ofstream file(path, std::ios::binary);
+    std::ofstream file(path.string(), std::ios::binary);
     file.write(content.data(), content.size());
     return path;
   }
 
   fs::path create_random_file(const std::string &filename, size_t size) {
     auto path = test_dir / filename;
-    std::ofstream f(path, std::ios::binary);
+    std::ofstream f(path.string(), std::ios::binary);
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<char> dist;
+    std::uniform_int_distribution<int> dist(std::numeric_limits<char>::min(),
+                                            std::numeric_limits<char>::max());
     std::vector<char> data(size);
     for (auto &c : data) {
-      c = dist(gen);
+      c = static_cast<char>(dist(gen));
     }
     f.write(data.data(), data.size());
     return path;
