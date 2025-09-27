@@ -1,4 +1,3 @@
-#include "ConsoleEventHandler.hpp"
 #include "Utils.hpp"
 #include <boost/program_options.hpp>
 #include <filesystem>
@@ -48,7 +47,7 @@ int main(int argc, char *argv[]) {
         std::make_unique<viruscan::FileScanEventHandler>(logFile);
     scanner->add_event_handler(std::move(fileHandler));
 
-    auto consoleHandler = std::make_unique<ConsoleEventHandler>();
+    // auto consoleHandler = std::make_unique<ConsoleEventHandler>();
     // if (vm.count("verbose")) {
     //   scanner->add_event_handler(std::move(consoleHandler));
     // }

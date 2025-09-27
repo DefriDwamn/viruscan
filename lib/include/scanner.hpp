@@ -1,4 +1,5 @@
 #pragma once
+
 #include "blockingconcurrentqueue.h"
 #include "boost/filesystem/path.hpp"
 #include <chrono>
@@ -8,9 +9,10 @@
 #include <string_view>
 #include <thread>
 #include <virusdatabase.hpp>
+#include "viruscanlib_export.hpp"
 
 namespace viruscan {
-class Scanner {
+class VIRUSCANLIB_API Scanner {
 private:
   moodycamel::BlockingConcurrentQueue<boost::filesystem::path> queue;
 

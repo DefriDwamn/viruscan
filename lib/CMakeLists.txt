@@ -29,6 +29,7 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 include_directories("include")
 add_library(viruscanlib SHARED ${SOURCES})
 target_link_libraries(viruscanlib PRIVATE Boost::filesystem Boost::hash2)
+target_compile_definitions(viruscanlib PRIVATE VIRUSCANLIB_EXPORTS)
 target_include_directories(viruscanlib PRIVATE ${CONCURRENTQUEUE_DIR})
 
 option(BUILD_TESTS "Tests" ON)
