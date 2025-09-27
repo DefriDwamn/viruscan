@@ -8,6 +8,7 @@ mkdir build && cd build
 ```
 ```bash
 cmake .. 
+```
 ```bash
 cmake --build . --target viruscancli
 ```
