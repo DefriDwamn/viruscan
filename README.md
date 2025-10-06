@@ -1,7 +1,7 @@
 # Сборка
 ## Windows
-- Compiler = MSVC 19.44.35217.0
-- CMake generator = Visual Studio 17 2022
+- Compiler = Clang++ 21.1.2 (MartinStorsjo.LLVM-MinGW.UCRT)
+- CMake generator = Ninja
 - Зависимости загружаются через fetchcontet + camelqueue(header-only) как git submodule
 - Конфигурация и сборка:
 ```bash
